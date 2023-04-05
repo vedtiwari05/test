@@ -1,0 +1,95 @@
+<!-- <?php
+session_start();
+$conn = mysqli_connect("localhost","root","","test");
+if(isset($_POST["login"]))
+{
+$username=$_POST['username'];
+$password= ($_POST['password']);
+$sql = "Select * from user where username ='$username' and password ='$password'";
+	$result = mysqli_query($conn,$sql);
+	$row = mysqli_fetch_array($result);
+	if($row) {
+			$_SESSION["userid"]= $row["id"];
+			if(!empty($_POST["remember"])) {
+setcookie ("user_login",$_POST["username"],time()+ (10 * 365 * 24 * 60 * 60));
+setcookie ("userpassword",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+} else {
+if(isset($_COOKIE["user_login"])) { 
+setcookie ("user_login","");
+if(isset($_COOKIE["userpassword"])) {
+setcookie ("userpassword","");
+				}
+			}
+	} 
+	}else {
+		echo "Invalid Login";
+	}
+}
+?> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login Page</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<nav>
+		<ul>
+			<li><a href="#">Home</a>
+                <ul>
+					<li><a href="#">demo 1</a></li>
+					<li><a href="#">demo 2</a></li>
+				</ul>
+            </li>
+			<li><a href="#">About Us</a>
+                <ul>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Projects</a></li>
+				</ul>
+            </li>
+			<li><a href="#">Gallery</a>
+				<ul>
+					<li><a href="#">Photos</a></li>
+					<li><a href="#">Videos</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<div class="login-container">
+		<h2>Login</h2>
+		<form method="post">
+			<label for="username">Username:</label>
+			<input type="username" id="email" name="username" required>
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" required>
+			<label for="remember-me">Remember me:</label>
+			<input type="checkbox" id="remember-me" name="remember-me">
+			<input type="submit" name="login">
+		</form>
+	</div>
+	<script>
+        const rmCheck = document.getElementById("remember-Me"),
+    emailInput = document.getElementById("email");
+
+if (localStorage.checkbox && localStorage.checkbox !== "") {
+  rmCheck.setAttribute("checked", "checked");
+  emailInput.value = localStorage.username;
+} else {
+  rmCheck.removeAttribute("checked");
+  emailInput.value = "";
+}
+
+function lsRememberMe() {
+  if (rmCheck.checked && emailInput.value !== "") {
+    localStorage.username = emailInput.value;
+    localStorage.checkbox = rmCheck.value;
+  } else {
+    localStorage.username = "";
+    localStorage.checkbox = "";
+  }
+}
+    </script>
+</body>
+</html>
